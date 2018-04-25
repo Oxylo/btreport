@@ -12,11 +12,13 @@ Create a 1 page PDF Performance report for any backtest.
 
     $ python example.py outputdir/for/report
 
-like:
+like so:
 
     $ python example.py /home/user/Desktop
 
 ## Output
 
-PDF Performance Report is written OUTPUTDIR:
+PDF Performance Report is written to given outputdir:
+
+![example_report]({filename}sampledata/example_report.jpg)
 
