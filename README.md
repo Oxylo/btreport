@@ -16,9 +16,16 @@ like so:
 
     $ python example.py /home/user/Desktop
 
+## Windows users
+
+The program has been deveveped and tested on Linux.
+Windows users may have problems installig the weasyprint library, see: http://weasyprint.readthedocs.io/en/latest/install.html#windows
+
 ## Output
 
 PDF Performance Report is written to given outputdir:
 
 ![Alt text](sampledata/example_report.jpg?raw=true "Example report")
+
+
 
