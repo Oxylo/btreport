@@ -20,5 +20,5 @@ like so:
 
 PDF Performance Report is written to given outputdir:
 
-![example_report]({filename}sampledata/example_report.jpg)
+![Alt text](sampledata/example_report.jpg?raw=true "Example report")
 
