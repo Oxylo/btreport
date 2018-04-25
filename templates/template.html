@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {font-size: 70%;}
+
+table {
+    table-layout: fixed;
+    width: 190px;
+    border-collapse: collapse;
+    border: 1px solid black;
+    margin: 5px;
+}
+
+th, td {
+    text-align: left;
+    padding: 1px;
+}
+
+tr {
+    background-color: #e6ffff;
+    color: 'black';
+}
+
+th {
+    background-color: #003366;
+    color:  #ffffff;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ----------------------- header block ------------------- -->
+
+<h2><center>Canaries Backtesting Report</center></h2>
+
+<table style="float: left">
+ <col style="width:50%">
+ <col style="width:50%">  
+  <tr>
+    <th colspan="2" style="center"><center>Strategy</center></th>
+  </tr>
+  <tr>
+    <td><b>name</b></td>
+    <td>{{strategy_name}}</td>
+  </tr>  
+
+{% for k, v in params.items() %}
+    <tr>
+    <td><b>{{k}}</b></td>
+    <td>{{v}}</td>
+  </tr>
+{% endfor %}
+
+</table>
+
+<table style="float: left">
+ <col style="width:33%">
+ <col style="width:67%">
+  <tr>
+    <th colspan="2"><center>Datafeed</center></th>
+  </tr>
+  <tr>
+    <td><b>file</b></td>
+    <td>{{file_name}}</td>
+  </tr>
+  <tr>
+    <td><b>start</b></td>
+    <td>{{start_date}}</td>
+  </tr>
+  <tr>
+    <td><b>end</b></td>
+    <td>{{end_date}}</td>
+  </tr>
+
+{% for i in range(params|length-2) %}
+    <tr>
+    <td><b>&nbsp;</b></td>
+    <td>&nbsp;</td>
+  </tr>
+{% endfor %}
+</table>
+
+
+<table style="float: left" width="100%">
+  <col style="width:33%">
+  <col style="width:67%">  
+  <tr>
+    <th colspan="2"><center>User</center></th>
+  </tr>
+  <tr>
+    <td><b>name</b></td>
+    <td>{{name_user}}</td>
+  </tr>
+   <tr>
+    <td><b>test at</b></td>
+    <td>{{processing_date}}</td>
+  </tr>
+  <tr>
+    <td><b>memo</b></td>
+    <td>{{memo_field}}</td>
+  </tr>
+{% for i in range(params|length-2) %}
+    <tr>
+    <td><b>&nbsp;</b></td>
+    <td>&nbsp;</td>
+  </tr>
+{% endfor %}
+
+
+</table>
+
+
+
+<!-- -------------------- equity & return curve --------------- -->
+
+<p>
+<img src= "{{url_equity_curve }}" alt="Equity Curve" style="width:650px;height:250px;" class=center>
+</p>
+<p>
+<img src= "{{url_return_curve }}" alt="Return Curve" style="width:650px;height:250px;" class=center>
+</p>
+<!--
+<img src="/home/pieter/projects/btccxt/equity_curve.png" alt="Equity Curve" style="width:80px;height:30px;" class=center> -->
+
+
+<!-- ------------------- performace statistics ----------------------------- -->
+<br>
+
+<h2><center>Strategy performance</center></h2>
+
+<!-- PnL table -->
+
+<table style="float: left" width="100%">
+  <col style="width:67%">
+  <col style="width:33%">  
+ <caption><b><center>PnL</center></b></caption>   
+  <tr>
+    <td><b>start capital</b></td>
+    <td>{{start_cash|round|int if start_cash != None else 'N/A'}}</td>
+  </tr>
+  <tr>
+    <td><b>total net profit</b></td>
+    <td>{{rpl|round(2, 'floor') if rpl != None else 'N/A'}}</td>
+  </tr>
+  <tr>
+    <td><b>$ winning trades</b></td>
+    <td>{{result_won_trades|round(2, 'floor') if result_won_trades != None else 'N/A'}}</td>
+  </tr>
+  <tr>
+  <tr>
+    <td><b>$ lost trades</b></td>
+    <td>{{result_lost_trades|round(2, 'floor') if result_lost_trades != None else 'N/A'}}</td>
+  </tr>
+  <tr>
+    <td><b>profit factor</b></td>
+    <td>{{profit_factor|round(2, 'floor') if profit_factor != None else 'N/A'}}</td>
+  </tr>
+  <tr>
+    <td><b>total return</b></td>
+    <td>{{total_return|round(2, 'floor') if total_return != None else 'N/A'}}%</td>
+  </tr>
+  <tr>
+    <td><b>annual return</b></td>
+    <td>{{annual_return|round(2, 'floor') if annual_return != None else 'N/A'}}%</td>
+  </tr>
+  <tr>
+  <tr>
+    <td><b>max. $ drawdown</b></td>
+    <td>{{max_money_drawdown|round(2, 'floor') if max_money_drawdown != None else 'N/A'}}</td>
+  </tr>
+  <tr>
+    <td><b>max. % drawdown</b></td>
+    <td>{{max_pct_drawdown|round(2, 'floor') if max_pct_drawdown != None else 'N/A'}}%</td>
+  </tr>
+<tr>
+  </table>
+
+<!-- Trades table -->
+
+  <table style="float: left" width="100%">
+  <col style="width:67%">
+  <col style="width:33%">  
+ <caption><b><center>Trades</center></b></caption>
+  <tr>
+    <td><b>number of trades</b></td>
+    <td>{{total_number_trades|round|int if total_number_trades != None else 'N/A'}}</td>
+  </tr>
+  <tr>
+    <td><b>%winning</b></td>
+    <td>{{pct_winning|round(2, 'floor') if pct_winning != None else 'N/A'}}%</td>
+  </tr>
+  <tr>
+    <td><b>%losing</b></td>
+    <td>{{pct_losing|round(2, 'floor') if pct_losing != None else 'N/A'}}%</td>
+  </tr>
+  <tr>
+    <td><b>avg $ winning</b></td>
+    <td>{{avg_money_winning|round(2, 'floor') if avg_money_winning != None else 'N/A'}}</td>
+  </tr>
+  <tr>
+    <td><b>avg $ losing</b></td>
+    <td>{{avg_money_losing|round(2, 'floor') if avg_money_losing != None else 'N/A'}}</td>
+  </tr>
+  <tr>
+    <td><b>best winning trade</b></td>
+    <td>{{best_winning_trade|round(2, 'floor') if best_winning_trade}}</td>
+  </tr>
+  <tr>
+    <td><b>worst losing trade</b></td>
+    <td>{{worst_losing_trade|round(2, 'floor') if worst_losing_trade}}</td>
+  </tr>
+  <tr>
+<tr>
+    <td><b>&nbsp;</b></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><b>&nbsp;</b></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+  </table>
+
+<!-- KPI table -->
+
+
+<table style="float: left" width="100%">
+  <col style="width:67%">
+  <col style="width:33%">  
+ <caption><b><center>KPI's</center></b></caption>
+  <tr>
+    <td><b>sharpe ratio</b></td>
+    <td>{{sharpe_ratio|round(2, 'floor') if sharpe_ratio != None else 'N/A'}}</td>
+  </tr>
+  <tr>
+    <td><b>SQN score</b></td>
+    <td>{{sqn_score|round(2, 'floor') if sqn_score != None else 'N/A'}}</td>
+  </tr>
+  <tr>
+    <td><b>SQN human<b></td>
+    <td>{{sqn_human if sqn_human != None else 'N/A'}}</td>
+  </tr>
+  <tr>
+<tr>
+    <td><b>&nbsp;</b></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><b>&nbsp;</b></td>
+    <td>&nbsp;</td>
+  </tr>
+<tr>
+    <td><b>&nbsp;</b></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><b>&nbsp;</b></td>
+    <td>&nbsp;</td>
+  </tr>
+<tr>
+    <td><b>&nbsp;</b></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><b>&nbsp;</b></td>
+    <td>&nbsp;</td>
+  </tr>
+
+  </table>
+
+</font>
+</body>
+</html>
+
