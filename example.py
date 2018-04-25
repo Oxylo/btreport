@@ -89,7 +89,7 @@ if __name__ == "__main__":
 
     # run backtest with both plotting and reporting
     cerebro.run()
-    # cerebro.plot(volume=False)
+    cerebro.plot(volume=False)
     cerebro.report(OUTPUTDIR,
                    infilename='btc_usd.csv',
                    user='Trading John',
