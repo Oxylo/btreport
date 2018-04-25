@@ -193,7 +193,8 @@ class PerformanceReport:
     def generate_html(self):
         """ Returns parsed HTML text string for report
         """
-        images = '/home/pieter/projects/btccxt/static/images'
+        basedir = os.path.abspath(os.path.dirname(__file__))
+        images = os.path.join(basedir, 'templates')
         eq_curve = os.path.join(images, 'equity_curve.png')
         rt_curve = os.path.join(images, 'return_curve.png')
         fig_equity = self.plot_equity_curve()
