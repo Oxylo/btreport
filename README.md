@@ -19,7 +19,7 @@ like so:
 ## Windows users
 
 The program has been deveveped and tested on Linux.
-Windows users may have problems installig the weasyprint library, see: http://weasyprint.readthedocs.io/en/latest/install.html#windows
+Windows users may face some problems installing the weasyprint library, for instructions see: http://weasyprint.readthedocs.io/en/latest/install.html#windows
 
 ## Output
 
